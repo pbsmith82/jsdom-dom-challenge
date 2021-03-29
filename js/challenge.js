@@ -4,7 +4,8 @@
 // document.addEventListener('DOMContentLoaded', () => {
 const counter = document.getElementById("counter")
 
-const like = document.getElementById("heart")
+const like = document.querySelector(".likes")
+const numbers = []
 
 function incrementCounter(){
     let newCounter = parseInt(counter.innerText)
@@ -39,6 +40,28 @@ function manuallyDecrement(){
 manuallyDecrement()
 
 // like.addEventListener('click', likedNumber)
+function incrementLike () {
+
+    const likedNumber = parseInt(counter.innerText)
+    numbers.push(likedNumber)
+    const howMany = numbers.filter(item => item == `${likedNumber}`).length
+    function searchNumber() {
+        const idNumber = document.getElementById(`${likedNumber}`)
+        if (idNumber)
+            idNumber.innerText =  `${likedNumber} has been liked ${howMany} times.`
+        else
+            like.innerHTML += `<li id=${likedNumber}> ${likedNumber} has been liked ${howMany} times. </li>`
+    }
+    searchNumber()
+
+}
+
+function manuallyLike(){
+    const heartButton = document.querySelector('#heart')
+    heartButton.addEventListener('click', incrementLike)
+}
+
+manuallyLike()
 
 // function likedNumber(){ #javascriptObject
 
